@@ -1,3 +1,31 @@
 ID: ui5_user_form
 _schema-version: '2.1'
 version: 0.0.1
+
+modules:
+ - name: user_ui
+   type: html5
+   path: user_ui
+   parameters:
+      disk-quota: 256M
+      memory: 256M
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: uaa_ui5_user_form
+    - name: dest_ui5_user_form
+
+resources:
+ - name: uaa_ui5_user_form
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+   type: org.cloudfoundry.managed-service
+
+ - name: dest_ui5_user_form
+   parameters:
+      service-plan: lite
+      service: destination
+   type: org.cloudfoundry.managed-service
+
